@@ -84,7 +84,7 @@ def manage_tickets(session):
             tickets = Ticket.get_all(session)
             for ticket in tickets:
                 print(ticket)
-        elif choice == "3":Connects to the database and creates a session to interact with it.
+        elif choice == "3":#Connects to the database and creates a session to interact with it.
             ticket_id = input("Enter Ticket ID: ")
             ticket = Ticket.find_by_id(session, ticket_id)
             print(ticket if ticket else "Ticket not found.")
