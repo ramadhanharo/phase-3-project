@@ -1,11 +1,12 @@
 from models import initialize_db, Match, Ticket
 from datetime import datetime
 
+# Connects to the database and creates a session
 def main():
-    session = initialize_db()#Connects to the database and creates a session to interact with it.
+    session = initialize_db()
     
     while True:
-        print("\nStadium Ticket Booking System")
+        print("\nTicket Booking System")
         print("1. Manage Matches")
         print("2. Manage Tickets")
         print("3. Exit")
@@ -21,6 +22,7 @@ def main():
         else:
             print("Invalid choice. Please try again.")
 
+# Function to manage matches
 def manage_matches(session):
     while True:
         print("\nMatch Management")
@@ -43,8 +45,11 @@ def manage_matches(session):
                 print("Invalid date format.")
         elif choice == "2":
             matches = Match.get_all(session)
-            for match in matches:
-                print(match)
+            if matches:
+                for match in matches:
+                    print(match)
+            else:
+                print("No matches found.")
         elif choice == "3":
             match_id = input("Enter Match ID: ")
             match = Match.find_by_id(session, match_id)
@@ -60,6 +65,7 @@ def manage_matches(session):
         else:
             print("Invalid choice. Please try again.")
 
+# Function to manage tickets
 def manage_tickets(session):
     while True:
         print("\nTicket Management")
@@ -82,9 +88,12 @@ def manage_tickets(session):
                 print("Invalid price format.")
         elif choice == "2":
             tickets = Ticket.get_all(session)
-            for ticket in tickets:
-                print(ticket)
-        elif choice == "3":#Connects to the database and creates a session to interact with it.
+            if tickets:
+                for ticket in tickets:
+                    print(ticket)
+            else:
+                print("No tickets found.")
+        elif choice == "3":
             ticket_id = input("Enter Ticket ID: ")
             ticket = Ticket.find_by_id(session, ticket_id)
             print(ticket if ticket else "Ticket not found.")
@@ -99,5 +108,5 @@ def manage_tickets(session):
         else:
             print("Invalid choice. Please try again.")
 
-if __name__ == "__main__":#ensures the script runs only when executed directly,
+if __name__ == "__main__":
     main()
